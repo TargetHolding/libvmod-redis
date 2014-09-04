@@ -1,4 +1,7 @@
-INCLUDES = -I$(VARNISHSRC)/include -I$(VARNISHSRC) -I/usr/local/include
+INCLUDES = \
+	-I$(VARNISHSRC)/include \
+	-I$(VARNISHSRC)/bin/varnishd \
+	-I$(VARNISHSRC) -I/usr/local/include
 
 vmoddir = $(VMODDIR)
 vmod_LTLIBRARIES = libvmod_redis.la
@@ -11,8 +14,8 @@ libvmod_redis_la_SOURCES = \
 	vcc_if.h \
 	vmod_redis.c
 
-vcc_if.c vcc_if.h: $(VARNISHSRC)/lib/libvmod_std/vmod.py $(top_srcdir)/src/vmod_redis.vcc
-	@PYTHON@ $(VARNISHSRC)/lib/libvmod_std/vmod.py $(top_srcdir)/src/vmod_redis.vcc
+vcc_if.c vcc_if.h: $(VARNISHSRC)/lib/libvcc/vmodtool.py $(top_srcdir)/src/vmod_redis.vcc
+	@PYTHON@ $(VARNISHSRC)/lib/libvcc/vmodtool.py $(top_srcdir)/src/vmod_redis.vcc
 
 VMOD_TESTS = tests/*.vtc
 .PHONY: $(VMOD_TESTS)

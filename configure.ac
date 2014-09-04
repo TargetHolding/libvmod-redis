@@ -38,10 +38,10 @@ if test "x$VARNISHSRC" = x; then
 	AC_MSG_ERROR([No Varnish source tree specified])
 fi
 VARNISHSRC=`cd $VARNISHSRC && pwd`
-AC_CHECK_FILE([$VARNISHSRC/include/varnishapi.h],
-	[],
-	[AC_MSG_FAILURE(["$VARNISHSRC" is not a Varnish source directory])]
-)
+#AC_CHECK_FILE([$VARNISHSRC/include/varnishapi.h],
+#	[],
+#	[AC_MSG_FAILURE(["$VARNISHSRC" is not a Varnish source directory])]
+#)
 
 # vmod installation dir
 AC_ARG_VAR([VMODDIR], [vmod installation directory @<:@LIBDIR/varnish/vmods@:>@])
