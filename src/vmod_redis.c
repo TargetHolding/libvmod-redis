@@ -211,7 +211,7 @@ VCL_VOID vmod_push(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING
 
 VCL_STRING vmod_pop(const struct vrt_ctx *ctx, struct vmod_priv *priv)
 {
-    void * tmpReply;
+    void * tmpReply = NULL;
     redisReply *reply = (redisReply *) tmpReply; /* avoid warning */
     const char *ret = NULL;
     char *digits;
