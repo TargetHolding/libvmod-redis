@@ -1,4 +1,4 @@
-$Module redis 3 redis
+$Module redis Varnish4 Redis Module
 $Init init_function
 $Function VOID	 init_redis(PRIV_VCL, STRING, INT, INT)
 $Function VOID	 send(PRIV_VCL, STRING)

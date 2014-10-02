@@ -5,7 +5,6 @@
 #include <pthread.h>
 #include <hiredis/hiredis.h>
 
-
 #include "vrt.h"
 #include "cache/cache.h"
 #include "vcc_if.h"
@@ -91,7 +90,8 @@ int init_function(struct vmod_priv *priv, const struct VCL_conf *conf)
     return (0);
 }
 
-VCL_VOID vmod_init_redis(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING host, VCL_INT port, VCL_INT timeout_ms)
+VCL_VOID
+vmod_init_redis(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING host, VCL_INT port, VCL_INT timeout_ms)
 {
     config_t *old_cfg = priv->priv;
 
@@ -139,7 +139,8 @@ static redisReply *redis_common(const struct vrt_ctx *ctx, struct vmod_priv *pri
     return NULL;
 }
 
-VCL_VOID vmod_send(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
+VCL_VOID
+vmod_send(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
 {
     redisReply *reply = redis_common(ctx, priv, command);
 
@@ -148,7 +149,8 @@ VCL_VOID vmod_send(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING
     }
 }
 
-VCL_STRING vmod_call(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
+VCL_STRING
+vmod_call(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
 {
     redisReply *reply = NULL;
     const char *ret = NULL;
@@ -195,12 +197,14 @@ done:
     return ret;
 }
 
-VCL_VOID vmod_pipeline(const struct vrt_ctx *ctx, struct vmod_priv *priv)
+VCL_VOID
+vmod_pipeline(const struct vrt_ctx *ctx, struct vmod_priv *priv)
 {
     redis_connect(priv->priv);
 }
 
-VCL_VOID vmod_push(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
+VCL_VOID
+vmod_push(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING command)
 {
     redisContext *c = pthread_getspecific(thread_key);
 
@@ -209,7 +213,8 @@ VCL_VOID vmod_push(const struct vrt_ctx *ctx, struct vmod_priv *priv, VCL_STRING
     }
 }
 
-VCL_STRING vmod_pop(const struct vrt_ctx *ctx, struct vmod_priv *priv)
+VCL_STRING
+vmod_pop(const struct vrt_ctx *ctx, struct vmod_priv *priv)
 {
     void * tmpReply = NULL;
     redisReply *reply = (redisReply *) tmpReply; /* avoid warning */
